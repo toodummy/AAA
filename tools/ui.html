@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>STORMZILLA UI harness</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #000; }
+  #game { position: absolute; inset: 0; overflow: hidden;
+    background:
+      radial-gradient(ellipse 30% 55% at 72% 46%, rgba(40, 44, 58, .9), transparent 70%),
+      radial-gradient(ellipse 60% 30% at 70% 8%, #2b3040, transparent 75%),
+      linear-gradient(180deg, #5a6a86 0%, #93a2b6 38%, #c9b98e 52%, #6f8748 56%, #4c6a35 78%, #2f4a25 100%); }
+  #game::after { content: ''; position: absolute; left: 66%; top: 6%; width: 12%; height: 52%;
+    background: linear-gradient(180deg, #2a2d39, #5b5f6c); clip-path: polygon(0 0, 100% 0, 60% 100%, 44% 100%); filter: blur(6px); opacity: .9; }
+  #ui { position: absolute; inset: 0; }
+  #dbg { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 99; display: none; padding: 10px 14px;
+    font: 12px/1.5 Consolas, monospace; color: #cfe; background: rgba(0, 0, 0, .85); border: 1px solid #456; white-space: pre; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="game"></div>
+<div id="ui"></div>
+<div id="dbg"></div>
+<script type="module" src="./ui-demo.js"></script>
+</body>
+</html>

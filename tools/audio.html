@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STORMZILLA soundboard</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; padding: 16px 20px 60px; background: #12151c; color: #dfe6f0; font: 14px/1.4 system-ui, sans-serif; }
+  h1 { font-size: 18px; margin: 0 0 4px; letter-spacing: .08em; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .12em; color: #8fa3bf; margin: 22px 0 8px; }
+  .hint { color: #8fa3bf; margin-bottom: 10px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 6px; }
+  button { background: #232a38; color: #e9eef6; border: 1px solid #36405a; border-radius: 6px; padding: 7px 11px; cursor: pointer; font: inherit; }
+  button:hover { background: #2e3850; }
+  button:active, button.on { background: #f0b541; color: #16130a; border-color: #f0b541; }
+  .row { display: flex; align-items: center; gap: 10px; margin: 5px 0; flex-wrap: wrap; }
+  .row label { width: 92px; color: #b6c3d6; }
+  .row input[type=range] { width: 260px; }
+  .row output { width: 44px; font-variant-numeric: tabular-nums; }
+  .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 8px 40px; }
+  #meter { position: sticky; top: 0; z-index: 2; background: #12151cee; padding: 8px 0 10px; display: flex; gap: 14px; align-items: center; }
+  #bar { flex: 1; height: 16px; background: #1d2330; border-radius: 4px; position: relative; overflow: hidden; }
+  #rms, #peak { position: absolute; left: 0; top: 0; bottom: 0; }
+  #rms { background: linear-gradient(90deg, #3fbf7f, #e8d44d 75%, #e5533d); width: 0; }
+  #peak { width: 2px; background: #fff; }
+  #read { width: 330px; font-variant-numeric: tabular-nums; color: #b6c3d6; }
+  canvas { width: 100%; height: 70px; background: #0c0f15; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<h1>STORMZILLA SOUNDBOARD</h1>
+<div class="hint">Everything here is synthesised live by <code>src/audio/audio.js</code>. Click anything to start audio.</div>
+<div id="meter">
+  <div id="bar"><div id="rms"></div><div id="peak"></div></div>
+  <div id="read">click to start</div>
+</div>
+<canvas id="scope" width="1200" height="70"></canvas>
+
+<div class="cols">
+  <section>
+    <h2>Volume</h2>
+    <div id="volume"></div>
+    <div class="row"><button id="pause">suspend()</button><button id="resume">resume()</button></div>
+    <h2>SFX options</h2>
+    <div id="sfxopts"></div>
+    <div class="row"><button id="spam">Destruction spam (5 s)</button><button id="combo">Combo run</button></div>
+  </section>
+  <section>
+    <h2>Storm (setStorm, every frame)</h2>
+    <div id="storm"></div>
+    <div class="row" id="stormflags"></div>
+    <h2>Music (setMusic)</h2>
+    <div class="grid" id="music"></div>
+    <div id="musicopts"></div>
+  </section>
+</div>
+
+<h2>SFX</h2>
+<div id="sfx"></div>
+<script type="module" src="./audio-test.js"></script>
+</body>
+</html>

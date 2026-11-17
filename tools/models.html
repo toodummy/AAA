@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>STORMZILLA - model viewer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #cfe6f5; font: 13px/1.4 system-ui, sans-serif; color: #1d2733; }
+  canvas { display: block; }
+  #hud { position: fixed; left: 10px; top: 8px; background: rgba(255,255,255,.78); padding: 6px 10px; border-radius: 8px; max-width: 60vw; }
+  #hud b { letter-spacing: .04em; }
+  #hud a { color: #1f6fb2; margin-right: 6px; text-decoration: none; }
+  body.clean #hud { display: none; }
+</style>
+</head>
+<body>
+<div id="hud"></div>
+<script type="module" src="./models-preview.js"></script>
+</body>
+</html>
