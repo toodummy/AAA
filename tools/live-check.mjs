@@ -1,0 +1,12 @@
+import { chromium } from 'playwright-core';
+const b = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true, args: ['--use-angle=d3d11', '--enable-gpu', '--ignore-gpu-blocklist'] });
+const p = await b.newPage({ viewport: { width: 1280, height: 720 } });
+const errs = []; p.on('pageerror', (e) => errs.push(String(e).slice(0, 200)));
+await p.goto('https://toodummy.github.io/AAA/?nopause'); await p.waitForTimeout(6000);
+const m1 = await p.evaluate(() => window.__sz && __sz.mode);
+await p.mouse.click(640, 360); await p.waitForTimeout(1500);
+const m2 = await p.evaluate(() => __sz.mode);
+await p.evaluate(() => __sz.actions.startRun('classic')); await p.waitForTimeout(6000);
+const m3 = await p.evaluate(() => ({ mode: __sz.mode, t: +__sz.G.t.toFixed(1) }));
+await p.screenshot({ path: 'shots/live.png' });
+console.log(m1, m2, JSON.stringify(m3), errs.join(' | ') || 'no errors'); await b.close();
