@@ -1,0 +1,18 @@
+import { _electron as electron } from 'playwright-core';
+const app = await electron.launch({ executablePath: 'release/STORMZILLA-win32-x64/STORMZILLA.exe', args: [], timeout: 60000 });
+const page = await app.firstWindow();
+const errs = []; page.on('pageerror', (e) => errs.push(String(e).slice(0, 300))); page.on('console', (m) => { if (m.type() === 'error') errs.push(m.text().slice(0, 200)); });
+await page.waitForTimeout(5000);
+await page.screenshot({ path: 'shots/exe-title.png' });
+const info = await page.evaluate(() => ({ mode: __sz.mode, native: !!window.stormzillaNative, gpu: (() => { const gl = __sz.R.renderer.getContext(); const e = gl.getExtension('WEBGL_debug_renderer_info'); return e ? gl.getParameter(e.UNMASKED_RENDERER_WEBGL) : '?'; })() }));
+console.log(JSON.stringify(info));
+await page.keyboard.press('Enter'); await page.waitForTimeout(1500);
+await page.evaluate(() => __sz.actions.startRun('classic')); await page.waitForTimeout(1000);
+await page.evaluate(() => { __sz.setAuto(true); }); await page.waitForTimeout(12000);
+const st = await page.evaluate(() => ({ mode: __sz.mode, t: __sz.G.t.toFixed(1), mass: Math.round(__sz.G.S.mass), lvl: __sz.G.S.level }));
+console.log(JSON.stringify(st));
+const fps = await page.evaluate(() => new Promise((res) => { let c = 0; const t = performance.now(); const f = () => { c++; if (performance.now() - t > 2000) res(c / 2); else requestAnimationFrame(f); }; requestAnimationFrame(f); }));
+console.log('fps', fps);
+await page.screenshot({ path: 'shots/exe-run.png' });
+console.log(errs.join('\n') || 'no errors');
+await app.close();

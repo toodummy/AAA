@@ -1,0 +1,12 @@
+"AppBuild"
+{
+	"AppID"	"REPLACE_WITH_APP_ID"
+	"Desc"	"STORMZILLA build"
+	"BuildOutput"	"output"
+	"ContentRoot"	"..\release\STORMZILLA-win32-x64"
+	"SetLive"	""
+	"Depots"
+	{
+		"REPLACE_WITH_DEPOT_ID"	"depot_build.vdf"
+	}
+}

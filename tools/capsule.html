@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;overflow:hidden;background:#000}
+#c{position:relative;overflow:hidden}
+#bg{position:absolute;inset:0;background-size:cover;background-position:center}
+#shade{position:absolute;inset:0}
+#logo{position:absolute;left:50%;transform:translate(-50%,-50%);filter:drop-shadow(0 6px 18px rgba(0,0,0,.75))}
+#logo svg{width:100%;height:auto;display:block}
+</style></head><body><div id="c"><div id="bg"></div><div id="shade"></div><div id="logo"></div></div>
+<script type="module">
+import { logoSVG } from '../src/ui/icons.js';
+const q = new URLSearchParams(location.search);
+const w = +q.get('w'), h = +q.get('h'), c = document.getElementById('c');
+c.style.width = w + 'px'; c.style.height = h + 'px';
+if (q.get('bg')) document.getElementById('bg').style.backgroundImage = `url(${q.get('bg')})`;
+if (q.get('pos')) document.getElementById('bg').style.backgroundPosition = q.get('pos');
+document.getElementById('shade').style.background = q.get('shade') || 'radial-gradient(ellipse at 50% 55%, rgba(0,0,0,0) 30%, rgba(0,0,0,.55) 100%)';
+const L = document.getElementById('logo');
+if (q.get('nologo')) L.remove(); else { L.innerHTML = logoSVG({ tagline: q.get('tag') !== '0' }); L.style.width = (+q.get('lw') || 80) + '%'; L.style.top = (+q.get('ly') || 50) + '%'; }
+if (q.get('transparent')) { document.body.style.background = 'transparent'; document.getElementById('bg').remove(); document.getElementById('shade').remove(); }
+window.ready = true;
+</script></body></html>

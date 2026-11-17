@@ -682,4 +682,4 @@
 }
 
 /* never let banners cover the upgrade cards or menus */
-[data-sz-screen="levelup"] .sz-toasts, [data-sz-screen="pause"] .sz-toasts, [data-sz-screen="results"] .sz-toasts { opacity: 0; transition: opacity .15s; }
+[data-sz-screen="levelup"] :is(.sz-toasts, .sz-banners, .sz-news), [data-sz-screen="pause"] :is(.sz-toasts, .sz-banners, .sz-news), [data-sz-screen="results"] :is(.sz-toasts, .sz-banners, .sz-news), [data-sz-screen="menu"] :is(.sz-banners, .sz-news) { opacity: 0 !important; transition: opacity .15s; }
